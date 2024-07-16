@@ -4,7 +4,7 @@ package elements;
  * Класс Input представляет текстовое поле на веб-странице и предоставляет методы для взаимодействия с ним.
  */
 public class Input extends BaseElement {
-    protected static final String INPUT_TAG = "input";
+    private static final String INPUT_TAG = "input";
 
     /**
      * Приватный конструктор Input с указанным XPath и атрибутом.
@@ -23,7 +23,7 @@ public class Input extends BaseElement {
      * @param firstParam - значение первого атрибута
      * @param secondParam - значение второго атрибута
      */
-    protected Input(String xPath, String firstParam, String secondParam) {
+    private Input(String xPath, String firstParam, String secondParam) {
         super(xPath, INPUT_TAG, firstParam, secondParam);
     }
 

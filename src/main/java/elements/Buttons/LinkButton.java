@@ -6,7 +6,7 @@ package elements.Buttons;
  * которые используются как кнопки.
  */
 public class LinkButton extends Button {
-    protected static final String LINK_TAG = "a";
+    private static final String LINK_TAG = "a";
 
     /**
      * Конструктор LinkButton с указанным XPath и атрибутом.

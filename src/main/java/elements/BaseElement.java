@@ -35,7 +35,7 @@ abstract public class BaseElement {
     private final static int LOAD_WAIT_SECONDS = 10;
     private final static int POLLING_SECONDS = 1;
     private final static WebElementCondition VISIBLE_CONDITION = Condition.visible;
-    public static final Logger logger = LogManager.getLogger();
+    private static final Logger logger = LogManager.getLogger();
 
     /**
      * Конструктор с полным XPath выражением.
