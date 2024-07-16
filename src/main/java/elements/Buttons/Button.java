@@ -9,20 +9,20 @@ public class Button extends BaseElement {
     protected static final String BUTTON_TAG = "button";
 
     /**
-     * Приватный конструктор Button с указанным XPath и параметром.
+     * Приватный конструктор Button с указанным XPath и атрибутом.
      *
      * @param xPath XPath выражение для нахождения элемента.
-     * @param param Параметр, используемый вместе с XPath выражением.
+     * @param param атрибут, используемый вместе с XPath выражением.
      */
     private Button(String xPath, String param) {
         super(xPath, param, BUTTON_TAG);
     }
 
     /**
-     * Защищенный конструктор Button с указанным XPath, параметром и HTML тегом.
+     * Защищенный конструктор Button с указанным XPath, атрибутом и HTML тегом.
      *
      * @param xPath XPath выражение для нахождения элемента.
-     * @param param Параметр, используемый вместе с XPath выражением.
+     * @param param атрибут, используемый вместе с XPath выражением.
      * @param htmlName HTML тег элемента.
      */
     protected Button(String xPath, String param, String htmlName) {

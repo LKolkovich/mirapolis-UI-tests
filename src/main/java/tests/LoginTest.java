@@ -31,16 +31,22 @@ public class LoginTest extends BaseTest {
     private static final String ALERT_RECOVERING_USER_NAME = "Пользователь с таким именем не найден.";
     private static final String SUCCESS_RECOVERING_USER_NAME = "На ваш электронный адрес отправлена " +
             "инструкция по восстановлению пароля.";
+    private static final boolean PASSWORD_SHOWN = true;
+    private static final boolean PASSWORD_NOT_SHOWN = false;
 
     /**
      * Методя для авторизации в системе под переданным логином паролем.
      *
      * @param login - логин пользователя
      * @param password - пароль пользователя
+     * @param isPasswordShown - true, если надо нажать "показать пароль", иначе false
      * @return - экземпляр класса домашенй старницы
      */
-    private HomePage loginAndSubmit(String login, String password) {
+    private HomePage loginAndSubmit(String login, String password, boolean isPasswordShown) {
         LoginPage loginPage = BasePage.page(LoginPage.class);
+        if (isPasswordShown) {
+            loginPage.clickShowPasswordButton();
+        }
         loginPage.fillLoginInput(login);
         loginPage.fillPasswordInput(password);
         return loginPage.clickLoginButton();
@@ -79,7 +85,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void successLoginTest() {
-        HomePage homePage = loginAndSubmit(RIGHT_LOGIN, RIGHT_PASSWORD);
+        HomePage homePage = loginAndSubmit(RIGHT_LOGIN, RIGHT_PASSWORD, PASSWORD_NOT_SHOWN);
         assertTrue(homePage.isAuthorized(), "Ошибка при авторизации с верным логином и паролем");
     }
 
@@ -89,7 +95,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void wrongLoginTest() {
-        loginAndSubmit(WRONG_LOGIN, WRONG_PASSWORD);
+        loginAndSubmit(WRONG_LOGIN, WRONG_PASSWORD, PASSWORD_NOT_SHOWN);
         assertEquals(ALERT_WINDOW_TEXT_WRONG, handleAlert(), "Ошибка обработки неверного логина");
     }
 
@@ -100,7 +106,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void wrongPasswordTest() {
-        loginAndSubmit(RIGHT_LOGIN, WRONG_PASSWORD);
+        loginAndSubmit(RIGHT_LOGIN, WRONG_PASSWORD, PASSWORD_NOT_SHOWN);
         assertEquals(ALERT_WINDOW_TEXT_WRONG, handleAlert(), "Ошибка обработки неверного пароля");
     }
 
@@ -110,7 +116,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void emptyLoginTest() {
-        loginAndSubmit(EMPTY_STRING, EMPTY_STRING);
+        loginAndSubmit(EMPTY_STRING, EMPTY_STRING, PASSWORD_NOT_SHOWN);
         assertEquals(ALERT_WINDOW_TEXT_EMPTY, handleAlert(), "Ошибка обработки пустого логина.");
     }
 
@@ -120,7 +126,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void emptyPasswordTest() {
-        loginAndSubmit(WRONG_LOGIN, EMPTY_STRING);
+        loginAndSubmit(WRONG_LOGIN, EMPTY_STRING, PASSWORD_NOT_SHOWN);
         assertEquals(ALERT_WINDOW_TEXT_EMPTY, handleAlert(), "Ошибка обработки пустого пароля.");
     }
 
@@ -130,7 +136,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void blackSpaceBeforeAndAfterLoginTest() {
-        HomePage homePage = loginAndSubmit(RIGHT_LOGIN_WITH_BLANK_SPACE, RIGHT_PASSWORD);
+        HomePage homePage = loginAndSubmit(RIGHT_LOGIN_WITH_BLANK_SPACE, RIGHT_PASSWORD, PASSWORD_NOT_SHOWN);
         assertTrue(homePage.isAuthorized(), "Ошибка при авторизации с верным паролем " +
                 "и логином с пробелами");
 
@@ -142,7 +148,7 @@ public class LoginTest extends BaseTest {
      */
     @Test
     public void blackSpaceBeforeAndAfterPasswordTest() {
-        HomePage homePage = loginAndSubmit(RIGHT_LOGIN, RIGHT_PASSWORD_WITH_BLANK_SPACE);
+        HomePage homePage = loginAndSubmit(RIGHT_LOGIN, RIGHT_PASSWORD_WITH_BLANK_SPACE, PASSWORD_NOT_SHOWN);
         assertTrue(homePage.isAuthorized(), "Ошибка при авторизации с верным логином " +
                 "и паролем с пробелами");
     }
@@ -155,8 +161,19 @@ public class LoginTest extends BaseTest {
     public void showPasswordButtonTest() {
         LoginPage loginPage = BasePage.page(LoginPage.class);
         loginPage.fillPasswordInput(RIGHT_PASSWORD);
-        loginPage.clickShowPasswordKey();
+        loginPage.clickShowPasswordButton();
         assertEquals(RIGHT_PASSWORD, loginPage.getPassword(), "Отображается неверный пароль");
+    }
+
+    /**
+     * Проверяет корректность ввода пароля и авторизаии при нажатой кнопке "показать пароль".
+     * Убеждается, что пользователь успешно авторизован на домашней странице.
+     */
+    @Test
+    public void loginWithShownPasswordTest() {
+        HomePage homePage = loginAndSubmit(RIGHT_LOGIN, RIGHT_PASSWORD_WITH_BLANK_SPACE, PASSWORD_SHOWN);
+        assertTrue(homePage.isAuthorized(), "Ошибка при авторизации с включенным " +
+                "отображаемым паролем");
     }
 
     /**

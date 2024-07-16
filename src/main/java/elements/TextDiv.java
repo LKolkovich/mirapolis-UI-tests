@@ -8,10 +8,10 @@ package elements;
 public class TextDiv extends BaseElement {
     private static final String DIV_TAG = "div";
     /**
-     * Приватный конструктор TextElement с указанным XPath, параметром и типом элемента.
+     * Приватный конструктор TextElement с указанным XPath, атрибутом и типом элемента.
      *
      * @param xPath XPath выражение для нахождения элемента.
-     * @param param Параметр, используемый вместе с XPath выражением.
+     * @param param атрибут, используемый вместе с XPath выражением.
      */
     private TextDiv(String xPath, String param) {
         super(xPath, param, DIV_TAG);

@@ -7,19 +7,21 @@ public class Input extends BaseElement {
     protected static final String INPUT_TAG = "input";
 
     /**
-     * Приватный конструктор Input с указанным XPath и параметром.
+     * Приватный конструктор Input с указанным XPath и атрибутом.
      *
      * @param xPath XPath выражение для нахождения элемента.
-     * @param param Параметр, используемый вместе с XPath выражением.
+     * @param param атрибута, используемый вместе с XPath выражением.
      */
     private Input(String xPath, String param) {
         super(xPath, param, INPUT_TAG);
     }
 
     /**
-     * Защищенный конструктор Input с указанным XPath, параметром и HTML тегом.
+     * Защищенный конструктор Input с указанным XPath, значениями атрибутов и HTML тегом.
      *
      * @param xPath XPath выражение для нахождения элемента.
+     * @param firstParam - значение первого атрибута
+     * @param secondParam - значение второго атрибута
      */
     protected Input(String xPath, String firstParam, String secondParam) {
         super(xPath, INPUT_TAG, firstParam, secondParam);

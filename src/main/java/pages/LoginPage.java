@@ -82,7 +82,7 @@ public class LoginPage extends BasePage {
     /**
      * Нажимает кнопку для отображения пароля.
      */
-    public void clickShowPasswordKey() {
+    public void clickShowPasswordButton() {
         showPasswordButton.click();
         logger.info("show password button clicked");
 

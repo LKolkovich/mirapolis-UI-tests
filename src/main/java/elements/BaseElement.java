@@ -114,6 +114,7 @@ abstract public class BaseElement {
 
     /**
      * Ждет пока элемент появится на стринце и нажимает его
+     * Вынесен в BaseElement, так как используются не только в Button но и в Input
      */
     public void click() {
         waitVisible();

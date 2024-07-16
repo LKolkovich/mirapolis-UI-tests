@@ -20,28 +20,6 @@ abstract public class BasePage {
     }
 
     /**
-     * Обновляет страницу и возвращает новый экземпляр того же класса
-     *
-     * @return новый элемент типа T, наследуемый от BasePage. Того же типа, что и текущая страница.
-     * @param <T> - класс наследник BasePage
-     */
-    public <T extends BasePage>T refresh() {
-        Selenide.refresh();
-        logger.info("page refreshed");
-        return page();
-    }
-
-    /**
-     * Создает новый экземпляр страницы того же класса
-     *
-     * @return новый элемент типа T, наследуемый от BasePage. Того же типа, что и текущая страница.
-     * @param <T> - класс наследник BasePage
-     */
-    public <T extends BasePage>T page() {
-        return (T) Selenide.page(this.getClass());
-    }
-
-    /**
      * Создает новый экземпляр страницы на основе её класса, вызывается статически
      *
      * @return новый элемент типа T, наследуемый от BasePage
